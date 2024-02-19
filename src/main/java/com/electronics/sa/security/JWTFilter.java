@@ -66,7 +66,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
 				}
 			}
-			
+
 		}
 		filterChain.doFilter(request, response);// it will delegates the current filter to the next filter
 	}

@@ -296,15 +296,15 @@ public class AuthServiceImpl implements AuthService {
 		String username = null;
 		if (refreshToken == null)
 			throw new RefreshTokenExpiredException("refresh token has expired ");		
-		
+
 		boolean existsRefreshToken = refreshTokenRepository.existsByTokenAndIsBlockedAndExpirationAfter(refreshToken, false, LocalDateTime.now());
 		if(existsRefreshToken)
 			username = jwtService.extractUsername(refreshToken);
-		
-			refreshTokenRepository.findByToken(refreshToken).ifPresent(rt -> {
-				rt.setBlocked(true);
-				refreshTokenRepository.save(rt);
-			});
+
+		refreshTokenRepository.findByToken(refreshToken).ifPresent(rt -> {
+			rt.setBlocked(true);
+			refreshTokenRepository.save(rt);
+		});
 
 		if (accessToken != null) {
 			accessTokenRepository.findByToken(accessToken).ifPresent(token -> {
@@ -315,7 +315,7 @@ public class AuthServiceImpl implements AuthService {
 
 		return userRepository.findByUsername(username).map(user -> {
 			grantAccess(httpServletResponse, user);
-			
+
 			return ResponseEntityProxy.getResponseEntity(HttpStatus.OK, "Refreshed the token cycle	", 
 					AuthResponse.builder()
 					.userId(user.getUserId())
@@ -326,7 +326,6 @@ public class AuthServiceImpl implements AuthService {
 					.refreshExpiration(LocalDateTime.now().plusSeconds(refreshExpirationInSeconds))
 					.build());
 		}).orElseThrow(() -> new UserNotFoundException("  user not  logged In "));
-
 	}	
 
 
