@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.electronics.sa.entity.User;
+import com.electronics.sa.enums.UserRole;
 
 public interface UserRepository extends JpaRepository<User, Integer>{
 
@@ -14,5 +15,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	boolean existsByEmail(String email);
 
 	List<User> findByIsEmailVerified(boolean b);
+
+	boolean existsByEmailAndUserRole(String email, UserRole userRole);
 
 }

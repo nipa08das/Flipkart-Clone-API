@@ -119,7 +119,7 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public ResponseEntity<ResponseStructure<UserResponse>> registerUser(UserRequest userRequest) 
 	{
-		if(userRepository.existsByEmail(userRequest.getEmail())) 
+		if(userRepository.existsByEmail(userRequest.getEmail()))
 			throw new UniqueConstraintViolationException("The user is already registered, please sign In");
 		String OTP = generateOTP();
 		User user = mapToUser(userRequest);

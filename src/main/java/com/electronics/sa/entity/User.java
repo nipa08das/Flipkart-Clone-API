@@ -17,7 +17,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "users")
+@Table(name = "Users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
