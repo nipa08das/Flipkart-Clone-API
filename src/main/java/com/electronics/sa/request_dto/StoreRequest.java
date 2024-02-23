@@ -8,5 +8,7 @@ import lombok.Setter;
 public class StoreRequest {
 
 	private String storeName;
+	private String logoLink;
 	private String about;
+	private int sellerId;
 }

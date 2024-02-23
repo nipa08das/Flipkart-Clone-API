@@ -17,11 +17,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.electronics.sa.exception.AddressNotFoundException;
+import com.electronics.sa.exception.ContactNotFoundException;
+import com.electronics.sa.exception.InvalidAddressTypeException;
 import com.electronics.sa.exception.InvalidOtpException;
+import com.electronics.sa.exception.InvalidPriorityException;
 import com.electronics.sa.exception.InvalidUserRoleException;
 import com.electronics.sa.exception.OtpExpiredException;
 import com.electronics.sa.exception.RefreshTokenExpiredException;
 import com.electronics.sa.exception.SessionExpiredException;
+import com.electronics.sa.exception.StoreNotFoundException;
 import com.electronics.sa.exception.UniqueConstraintViolationException;
 import com.electronics.sa.exception.UserAlreadyLoggedInException;
 import com.electronics.sa.exception.UserNotFoundException;
@@ -104,5 +109,35 @@ public class ApplicationExceptionHandelr extends ResponseEntityExceptionHandler{
 	public ResponseEntity<Object> handleRefreshTokenExpired(RefreshTokenExpiredException ex)
 	{
 		return exceptionStructure(HttpStatus.FORBIDDEN, ex.getMessage(), "Refresh Token Expired");
+	}
+	
+	@ExceptionHandler(StoreNotFoundException.class)
+	public ResponseEntity<Object> handleStoreNotFound(StoreNotFoundException ex)
+	{
+		return exceptionStructure(HttpStatus.NOT_FOUND, ex.getMessage(), "Store not found");
+	}
+	
+	@ExceptionHandler(InvalidAddressTypeException.class)
+	public ResponseEntity<Object> handleInvalidAddressType(InvalidAddressTypeException ex)
+	{
+		return exceptionStructure(HttpStatus.BAD_REQUEST, ex.getMessage(), "Invalid Address Type");
+	}
+	
+	@ExceptionHandler(AddressNotFoundException.class)
+	public ResponseEntity<Object> handleAddressNotFound(AddressNotFoundException ex)
+	{
+		return exceptionStructure(HttpStatus.NOT_FOUND, ex.getMessage(), "Address not found");
+	}
+	
+	@ExceptionHandler(ContactNotFoundException.class)
+	public ResponseEntity<Object> handleContactNotFound(ContactNotFoundException ex)
+	{
+		return exceptionStructure(HttpStatus.NOT_FOUND, ex.getMessage(), "Contact not found");
+	}
+	
+	@ExceptionHandler(InvalidPriorityException.class)
+	public ResponseEntity<Object> handleInvalidPriority(InvalidPriorityException ex)
+	{
+		return exceptionStructure(HttpStatus.BAD_REQUEST, ex.getMessage(), "Invalid Priority");
 	}
 }

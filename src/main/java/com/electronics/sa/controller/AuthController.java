@@ -1,6 +1,5 @@
 package com.electronics.sa.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,12 +19,14 @@ import com.electronics.sa.util.SimpleResponseStructure;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 
 @RestController
 @CrossOrigin(allowCredentials = "true", origins = "http://localhost:5173/")
 @RequestMapping("/api/v1")
+@AllArgsConstructor
 public class AuthController {
-	@Autowired
+	
 	private AuthService authService;
 	
 	@PostMapping("/users/register")

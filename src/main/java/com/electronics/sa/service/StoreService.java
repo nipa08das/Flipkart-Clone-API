@@ -10,4 +10,10 @@ public interface StoreService {
 
 	ResponseEntity<ResponseStructure<StoreResponse>> createStore(StoreRequest storeRequest);
 
+	ResponseEntity<ResponseStructure<StoreResponse>> updateStore(StoreRequest storeRequest, int storeId);
+
+	ResponseEntity<ResponseStructure<StoreResponse>> findStoreById(int storeId);
+
+	ResponseEntity<ResponseStructure<StoreResponse>> findStoreBySeller(int sellerId);
+
 }
